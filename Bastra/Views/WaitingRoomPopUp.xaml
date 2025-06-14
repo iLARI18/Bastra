@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="Bastra.Views.WaitingRoomPopUp"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:Bastra.ViewModels"
+    x:DataType="vm:WaitingRoomPopUpVM"
+    CanBeDismissedByTappingOutsideOfPopup="False">
+
+    <VerticalStackLayout
+        Padding="15"
+        BackgroundColor="#d8ac75"
+        FlowDirection="LeftToRight">
+        <ImageButton
+            Command="{Binding CloseWaitingRoomCommand}"
+            HeightRequest="55"
+            HorizontalOptions="Start"
+            IsVisible="{Binding LeaveWaitingRoomVisible}"
+            Source="cancel.png"
+            WidthRequest="35" />
+        <Frame
+            Padding="30"
+            BackgroundColor="#d8ac75"
+            BorderColor="Transparent"
+            CornerRadius="25"
+            HasShadow="True"
+            WidthRequest="350">
+
+            <VerticalStackLayout HorizontalOptions="Center" Spacing="25">
+                <!--  Game Lobby Title with Cards Icon  -->
+                <Label
+                    FontAttributes="Bold"
+                    FontFamily="CardsFont"
+                    FontSize="36"
+                    HorizontalOptions="Center"
+                    Text="♣️ Game Lobby ♣️"
+                    TextColor="#071731" />
+
+                <BoxView
+                    BackgroundColor="#071731"
+                    HeightRequest="3"
+                    Opacity="0.6"
+                    WidthRequest="220" />
+
+                <!--  Host Name  -->
+                <Label
+                    FontAttributes="Bold"
+                    FontFamily="CardsFont"
+                    FontSize="28"
+                    HorizontalOptions="Center"
+                    Text="{Binding HostName, StringFormat='Host: {0}'}"
+                    TextColor="#071731" />
+
+                <BoxView
+                    BackgroundColor="#071731"
+                    HeightRequest="2"
+                    Opacity="0.6"
+                    WidthRequest="220" />
+
+                <!--  Player Joined  -->
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Label
+                        FontAttributes="Bold"
+                        FontFamily="CardsFont"
+                        FontSize="28"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding IsRoomNotEmpty}"
+                        Text="{Binding GuestName, StringFormat='Guest: {0}'}"
+                        TextColor="#071731" />
+                    <ActivityIndicator
+                        HeightRequest="35"
+                        HorizontalOptions="Center"
+                        IsRunning="{Binding IsRoomWaiting}"
+                        IsVisible="{Binding IsRoomWaiting}"
+                        WidthRequest="35"
+                        Color="#071731" />
+                </HorizontalStackLayout>
+
+                <!--  Countdown Timer for Game Start  -->
+                <Label
+                    FontAttributes="Bold"
+                    FontFamily="CardsFont"
+                    FontSize="22"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsRoomFull}"
+                    Text="{Binding TimeLeft, StringFormat='Game starts in: {0}'}"
+                    TextColor="#990000" />
+
+                <ProgressBar
+                    BackgroundColor="#071731"
+                    HeightRequest="10"
+                    IsVisible="{Binding IsRoomFull}"
+                    Progress="{Binding ProgressTimeLeft}"
+                    ProgressColor="#990000"
+                    WidthRequest="280" />
+
+                <!--  Waiting Indicator  -->
+
+
+                <Label
+                    FontAttributes="Bold"
+                    FontFamily="CardsFont"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsRoomWaiting}"
+                    Text="♠️ ⏳ Waiting for more players..."
+                    TextColor="#071731" />
+
+                <Label
+                    FontAttributes="Bold"
+                    FontFamily="CardsFont"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsRoomFull}"
+                    Text="♥️ Game is starting ♥️"
+                    TextColor="#990000" />
+            </VerticalStackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</toolkit:Popup>

@@ -1,0 +1,79 @@
+<toolkit:Popup
+    x:Class="Bastra.Views.WinGamePopUp"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:Bastra.ViewModels"
+    x:DataType="vm:WinGamePopUpVM"
+    CanBeDismissedByTappingOutsideOfPopup="False"
+    Color="Transparent">
+
+    <Grid
+        HeightRequest="300"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        WidthRequest="300">
+        <Ellipse
+            Fill="Transparent"
+            HeightRequest="300"
+            Stroke="#d8ac75"
+            StrokeThickness="5"
+            WidthRequest="300" />
+
+        <!--  Circular Container  -->
+        <Border
+            Padding="25"
+            BackgroundColor="#071731"
+            HeightRequest="300"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="300">
+
+            <Border.Clip>
+                <EllipseGeometry
+                    Center="150,150"
+                    RadiusX="140"
+                    RadiusY="140" />
+            </Border.Clip>
+
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                Spacing="15"
+                VerticalOptions="Center">
+
+                <!--  Title Label  -->
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="35"
+                    HorizontalOptions="Center"
+                    Text="{Binding GameStatus}"
+                    TextColor="#d8ac75"
+                    FontFamily="CardsFont" />
+
+                <!--  Message Label  -->
+                <Label
+                    Margin="10,0"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Message}"
+                    TextColor="#d8ac75"
+                    FontFamily="CardsFont" />
+
+                <!--  Exit Button  -->
+                <Button
+                    BackgroundColor="#d8ac75"
+                    Command="{Binding LeaveCommand}"
+                    CornerRadius="20"
+                    FontAttributes="Bold"
+                    FontSize="22"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    Text="Quit"
+                    TextColor="#071731"
+                    WidthRequest="120"
+                    FontFamily="CardsFont" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</toolkit:Popup>

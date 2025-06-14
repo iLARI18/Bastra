@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Bastra.Views.GamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Bastra.ViewModels"
+    x:DataType="vm:GamePageVM"
+    BackgroundImageSource="gamepage_background.png"
+    FlowDirection="LeftToRight"
+    Shell.TabBarIsVisible="False">
+
+    <!--  Disable the default back button  -->
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
+    <!--  Page Resources  -->
+    <ContentPage.Resources>
+        <!--  Base Label Style  -->
+        <Style x:Key="BaseLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <!--  Emphasis Label (e.g., for headings)  -->
+        <Style
+            x:Key="EmphasisLabelStyle"
+            BasedOn="{StaticResource BaseLabelStyle}"
+            TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+
+        <!--  Base Button Style  -->
+        <Style x:Key="BaseButtonStyle" TargetType="Button">
+            <Setter Property="CornerRadius" Value="25" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="HeightRequest" Value="55" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="WidthRequest" Value="160" />
+        </Style>
+
+        <!--  Exit Button  -->
+        <Style
+            x:Key="ExitButtonStyle"
+            BasedOn="{StaticResource BaseButtonStyle}"
+            TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#FF5252" />
+            <Setter Property="HorizontalOptions" Value="End" />
+        </Style>
+
+        <!--  Throw Card Button  -->
+        <Style
+            x:Key="ThrowButtonStyle"
+            BasedOn="{StaticResource BaseButtonStyle}"
+            TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#2196F3" />
+        </Style>
+
+        <!--  Collect Cards Button  -->
+        <Style
+            x:Key="CollectButtonStyle"
+            BasedOn="{StaticResource BaseButtonStyle}"
+            TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#4CAF50" />
+            <Setter Property="WidthRequest" Value="180" />
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout HeightRequest="{Binding ScreenHeight}" WidthRequest="{Binding ScreenWidth}">
+        <Grid Padding="10" RowDefinitions="*,*,0.8*,*,*">
+
+            <!--  Top Section: Exit Button and TurnType (Centered)  -->
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+                <!--  Exit Button (Left Side)  -->
+                <ImageButton
+                    x:Name="btnExit"
+                    Margin="0,0,0,0"
+                    Aspect="AspectFit"
+                    BackgroundColor="Transparent"
+                    Command="{Binding OpenLeaveGamePopUpCommand}"
+                    HeightRequest="65"
+                    HorizontalOptions="Start"
+                    Source="arrow_back.png"
+                    WidthRequest="35" />
+
+                <!--  Turn Indicator (Centered)  -->
+                <Label
+                    Grid.Column="1"
+                    Margin="-50,0,0,0"
+                    FontAttributes="Bold"
+                    FontFamily="CardsFont"
+                    FontSize="35"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource EmphasisLabelStyle}"
+                    Text="{Binding AnimatedTurnText, FallbackValue='Waiting for turn...'}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <!--  Stats Card  -->
+            <Border
+                Grid.Row="1"
+                Padding="15"
+                BackgroundColor="#88000000"
+                HeightRequest="110"
+                HorizontalOptions="Center"
+                MinimumHeightRequest="110"
+                Stroke="White"
+                StrokeShape="RoundRectangle 10"
+                StrokeThickness="2"
+                WidthRequest="350">
+
+                <Grid ColumnDefinitions="*,*,*" HorizontalOptions="FillAndExpand">
+                    <!--  My Stats (Left)  -->
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        HorizontalOptions="Start"
+                        Spacing="5">
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="CardsFont"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource BaseLabelStyle}"
+                            Text="{Binding CurrentPlayerName}" />
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource BaseLabelStyle}"
+                            Text="{Binding MyCardCount, StringFormat='🃏 {0}'}" />
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource BaseLabelStyle}"
+                            Text="{Binding MyScore, StringFormat='🏅 {0}'}" />
+                    </VerticalStackLayout>
+
+                    <!--  Game Info (Middle)  -->
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        HorizontalOptions="Center"
+                        Spacing="5">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Style="{StaticResource BaseLabelStyle}"
+                            Text="{Binding ScoreTarget, StringFormat='🏆 {0}'}" />
+                        <Label
+                            FontSize="14"
+                            Style="{StaticResource BaseLabelStyle}"
+                            Text="{Binding Rounds, StringFormat='🔄 {0}'}" />
+                        <Label
+                            FontSize="14"
+                            Style="{StaticResource BaseLabelStyle}"
+                            Text="{Binding PackageCards, StringFormat='📦 {0}'}" />
+                    </VerticalStackLayout>
+
+                    <!--  Opponent Stats (Right)  -->
+                    <VerticalStackLayout
+                        Grid.Column="2"
+                        HorizontalOptions="End"
+                        Spacing="5">
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="CardsFont"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource BaseLabelStyle}"
+                            Text="{Binding OpponnentName}" />
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource BaseLabelStyle}"
+                            Text="{Binding OpponentCardCount, StringFormat='🃏 {0}'}" />
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource BaseLabelStyle}"
+                            Text="{Binding OpponentScore, StringFormat='🏅 {0}'}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!--  Middle Section: Table Cards ScrollView  -->
+            <ScrollView
+                x:Name="scrlMyCards"
+                Grid.Row="2"
+                Margin="0,40,0,0"
+                HeightRequest="300"
+                HorizontalOptions="Center"
+                Orientation="Horizontal"
+                VerticalOptions="Center">
+                <Grid
+                    x:Name="grdTableCards"
+                    Margin="0,20,0,0"
+                    HeightRequest="200"
+                    HorizontalOptions="Center" />
+            </ScrollView>
+
+            <!--  Bottom Section: Player Cards + Action Buttons  -->
+            <VerticalStackLayout
+                Grid.Row="3"
+                HorizontalOptions="Center"
+                Spacing="5">
+
+                <!--  Player Cards  -->
+                <ScrollView HorizontalOptions="Center">
+                    <Grid
+                        x:Name="grdMyCards"
+                        HeightRequest="200"
+                        HorizontalOptions="Center" />
+                </ScrollView>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                Grid.Row="4"
+                HorizontalOptions="Center"
+                Spacing="5">
+                <HorizontalStackLayout HorizontalOptions="FillAndExpand" Spacing="10">
+                    <Button
+                        Command="{Binding ThrowCardCommand}"
+                        FontFamily="CardsFont"
+                        FontSize="30"
+                        IsEnabled="{Binding CanThrowCard}"
+                        Style="{StaticResource ThrowButtonStyle}"
+                        Text="↑Throw↑" />
+
+                    <Button
+                        Command="{Binding CollectCardsCommand}"
+                        FontFamily="CardsFont"
+                        FontSize="30"
+                        IsEnabled="{Binding CanCollectCards}"
+                        Style="{StaticResource CollectButtonStyle}"
+                        Text="↓Collect↓" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+    </StackLayout>
+
+
+</ContentPage>
+

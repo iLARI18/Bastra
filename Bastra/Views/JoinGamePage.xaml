@@ -1,0 +1,167 @@
+﻿<ContentPage
+    x:Class="Bastra.Views.JoinGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Bastra.Models"
+    xmlns:vm="clr-namespace:Bastra.ViewModels"
+    Padding="15"
+    x:DataType="vm:JoinGamePageVM"
+    FlowDirection="LeftToRight"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0.1" Color="#1e2b44" />
+            <GradientStop Offset="0.5" Color="#23487a" />
+            <GradientStop Offset="0.9" Color="#3268a3" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" RowSpacing="15">
+            <Grid Grid.Row="1" HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding AddGameCommand}"
+                    CornerRadius="10"
+                    FontFamily="CardsFont"
+                    FontSize="30"
+                    Text="CREATE"
+                    TextColor="Black"
+                    WidthRequest="160">
+
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Offset="0.0" Color="#d8ac75" />
+                            <GradientStop Offset="1.0" Color="#bfa06a" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button
+                    Grid.Column="0"
+                    Command="{Binding OpenSelectionCommand}"
+                    CornerRadius="10"
+                    FontFamily="CardsFont"
+                    FontSize="30"
+                    Text="{Binding TargetPointsDisplay}"
+                    TextColor="Black"
+                    WidthRequest="160">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Offset="0.0" Color="#d8ac75" />
+                            <GradientStop Offset="1.0" Color="#bfa06a" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </Grid>
+
+            <!--  Header Label  -->
+            <Border
+                Grid.Row="2"
+                BackgroundColor="Transparent"
+                Stroke="#bfa06a"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                StrokeThickness="1">
+                <Label
+                    Padding="10"
+                    FontAttributes="Bold"
+                    FontFamily="CardsFont"
+                    FontSize="{OnIdiom Phone=26,
+                                       Tablet=30}"
+                    HorizontalOptions="Center"
+                    Text="AVAILABLE GAMES"
+                    TextColor="#d8ac75"
+                    VerticalOptions="Center" />
+            </Border>
+
+            <Border
+                Grid.Row="3"
+                Padding="10"
+                BackgroundColor="#661A1A1A"
+                Stroke="#bfa06a"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                StrokeThickness="1">
+                <ListView
+                    x:Name="lvGames"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding GamesList}"
+                    SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:GameModel">
+                            <ViewCell>
+                                <Border
+                                    Margin="0,5"
+                                    Padding="10"
+                                    BackgroundColor="#AA3A3F4B"
+                                    Stroke="#bfa06a"
+                                    StrokeThickness="0.3">
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Column="0" Spacing="5">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="16"
+                                                LineBreakMode="WordWrap"
+                                                Text="{Binding HostName}"
+                                                TextColor="White" />
+                                            <Label
+                                                FontSize="14"
+                                                LineBreakMode="CharacterWrap"
+                                                Text="{Binding Created}"
+                                                TextColor="White" />
+                                        </StackLayout>
+                                        <Label
+                                            Grid.Column="1"
+                                            FontAttributes="Bold"
+                                            FontSize="16"
+                                            Text="{Binding ScoreTarget, StringFormat='Target: {0}'}"
+                                            TextColor="White"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+
+            <!--  Footer Button  -->
+            <Border
+                Grid.Row="4"
+                BackgroundColor="Transparent"
+                Stroke="Transparent"
+                StrokeThickness="1">
+                <Button
+                    Command="{Binding BackCommand}"
+                    CornerRadius="15"
+                    FontFamily="CardsFont"
+                    FontSize="{OnIdiom Phone=30,
+                                       Tablet=35}"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    Text="BACK"
+                    TextColor="Black"
+                    WidthRequest="{OnIdiom Phone=180,
+                                           Tablet=220}">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Offset="0.0" Color="#d8ac75" />
+                            <GradientStop Offset="1.0" Color="#bfa06a" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

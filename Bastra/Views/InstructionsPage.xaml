@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Bastra.Views.InstructionsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Bastra.ViewModels"
+    x:DataType="vm:InstructionsPageVM"
+    FlowDirection="{Binding FlowDirection}"
+    Shell.NavBarIsVisible="True"
+    NavigationPage.HasBackButton="False"
+             Shell.BackgroundColor="#3268a3"
+    Title=""
+    >
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding TranslateCommand}"
+            IconImageSource="{Binding TranslateImage}"
+            Order="Secondary"
+            Text="{Binding TranslateTo}" />
+    </ContentPage.ToolbarItems>
+
+
+     <ContentPage.Background>
+     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0.3"
+                          Color="#3268a3" />
+         <GradientStop Offset="0.5" Color="#23487a" />
+            <GradientStop Offset="0.9"
+                          Color="#1e2b44" />
+     </LinearGradientBrush>
+ </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <!--  Page Title  -->
+            <Frame
+                Padding="15"
+                BackgroundColor="#d8ac75"
+                CornerRadius="15"
+                HasShadow="True"
+                Opacity="0.9">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HorizontalOptions="Center"
+                    Text="{Binding Title}"
+                    TextColor="#23487a" />
+            </Frame>
+
+            <!--  Rule 1  -->
+
+            <Frame
+                Padding="15"
+                BackgroundColor="#d8ac75"
+                CornerRadius="15"
+                HasShadow="True"
+                Opacity="0.9">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        Text="{Binding Rule1Title}"
+                        TextColor="#1e2b44" />
+                    <Label
+                        Padding="5"
+                        FontSize="16"
+                        Text="{Binding Rule1Content}"
+                        TextColor="Black" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!--  Rule 2  -->
+            <Frame
+                Padding="15"
+                BackgroundColor="#d8ac75"
+                CornerRadius="15"
+                HasShadow="True"
+                Opacity="0.95">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        Text="{Binding Rule2Title}"
+                        TextColor="#1e2b44" />
+                    <Label
+                        Padding="5"
+                        FontSize="16"
+                        Text="{Binding Rule2Content}"
+                        TextColor="Black" />
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!--  Rule 3  -->
+            <Frame
+                Padding="15"
+                BackgroundColor="#d8ac75"
+                CornerRadius="15"
+                HasShadow="True"
+                Opacity="0.95">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        Text="{Binding Rule3Title}"
+                        TextColor="#1e2b44" />
+                    <Label
+                        Padding="5"
+                        FontSize="16"
+                        Text="{Binding Rule3Content}"
+                        TextColor="Black" />
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!--  Rule 4  -->
+            <Frame
+                Padding="15"
+                BackgroundColor="#d8ac75"
+                CornerRadius="15"
+                HasShadow="True"
+                Opacity="0.95">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        Text="{Binding Rule4Title}"
+                        TextColor="#1e2b44" />
+                    <Label
+                        Padding="5"
+                        FontSize="16"
+                        Text="{Binding Rule4Content}"
+                        TextColor="Black" />
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!--  Rule 5  -->
+            <Frame
+                Padding="15"
+                BackgroundColor="#d8ac75"
+                CornerRadius="15"
+                HasShadow="True"
+                Opacity="0.95">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        Text="{Binding Rule5Title}"
+                        TextColor="#1e2b44" />
+                    <Label
+                        Padding="5"
+                        FontSize="16"
+                        Text="{Binding Rule5Content}"
+                        TextColor="Black" />
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!--  Rule 6  -->
+            <Frame
+                Padding="15"
+                BackgroundColor="#d8ac75"
+                CornerRadius="15"
+                HasShadow="True"
+                Opacity="0.95">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        Text="{Binding Rule6Title}"
+                        TextColor="#1e2b44" />
+                    <Label
+                        Padding="5"
+                        FontSize="16"
+                        Text="{Binding Rule6Content}"
+                        TextColor="Black" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

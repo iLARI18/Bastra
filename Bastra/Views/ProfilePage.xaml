@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Bastra.Views.ProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Bastra.ViewModels"
+    x:DataType="vm:ProfilePageVM"
+    BackgroundColor="#071731"
+    FlowDirection="LeftToRight"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="True">
+
+    <ContentPage.Resources>
+        <Style x:Key="TransparentFrameStyle" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="BorderColor" Value="#d8ac75" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="HasShadow" Value="False" />
+        </Style>
+
+        <Style x:Key="AccentButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#d8ac75" />
+            <Setter Property="TextColor" Value="#071731" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="HeadingLabelStyle" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="#d8ac75" />
+        </Style>
+        <Style x:Key="BodyLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#d8ac75" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0.1" Color="#1e2b44" />
+            <GradientStop Offset="0.5" Color="#23487a" />
+            <GradientStop Offset="0.9" Color="#3268a3" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            HorizontalOptions="FillAndExpand"
+            Spacing="20"
+            VerticalOptions="FillAndExpand">
+
+            <Frame Padding="20" Style="{StaticResource TransparentFrameStyle}">
+                <Grid>
+
+                    <!--  Profile Image & Name Stack  -->
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Frame
+                            Padding="0"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            CornerRadius="60"
+                            HasShadow="False"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <ImageButton
+                                Aspect="AspectFill"
+                                Command="{Binding PickImageCommand}"
+                                HeightRequest="120"
+                                Source="{Binding ProfileImageSource}"
+                                WidthRequest="120" />
+                        </Frame>
+
+                        <Label
+                            Margin="10,5,10,0"
+                            FontFamily="CardsFont"
+                            FontSize="30"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="{Binding Name}" />
+
+                        <Label
+                            Margin="10,5,10,0"
+                            FontFamily="CardsFont"
+                            FontSize="15"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="{Binding DateCreted, StringFormat='Since {0}'}" />
+                    </VerticalStackLayout>
+
+                    <!--  Remove Profile Image Button (Top-Right Corner)  -->
+                    <ImageButton
+                        Margin="0,5,5,0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding RemoveImageCommand}"
+                        HeightRequest="40"
+                        HorizontalOptions="End"
+                        IsVisible="{Binding IsCustomImageSet}"
+                        Source="account_circle_off.png"
+                        VerticalOptions="Start"
+                        WidthRequest="40" />
+                </Grid>
+            </Frame>
+
+            <Frame Padding="20" Style="{StaticResource TransparentFrameStyle}">
+                <VerticalStackLayout Spacing="15">
+                    <HorizontalStackLayout>
+                        <Label
+                            FontFamily="CardsFont"
+                            FontSize="20"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="Games Played:"
+                            WidthRequest="120" />
+                        <Label
+                            FontFamily="CardsFont"
+                            FontSize="20"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="{Binding GamesPlayed}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label
+                            FontFamily="CardsFont"
+                            FontSize="20"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="Games Won:"
+                            WidthRequest="120" />
+                        <Label
+                            FontFamily="CardsFont"
+                            FontSize="20"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="{Binding GamesWon}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label
+                            FontFamily="CardsFont"
+                            FontSize="20"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="Last Game Played: "
+                            WidthRequest="150" />
+                        <Label
+                            FontFamily="CardsFont"
+                            FontSize="20"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="{Binding LastGamePlayedDate}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label
+                            FontFamily="CardsFont"
+                            FontSize="20"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="Win Streak: "
+                            WidthRequest="180" />
+                        <Label
+                            FontFamily="CardsFont"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="{Binding WinStreak}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label
+                            FontFamily="CardsFont"
+                            FontSize="20"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="Longest Win Streak: "
+                            WidthRequest="180" />
+                        <Label
+                            FontFamily="CardsFont"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource BodyLabelStyle}"
+                            Text="{Binding LongestWinStreak}" />
+                    </HorizontalStackLayout>
+                    <Label
+                        Margin="0,10,0,5"
+                        FontFamily="CardsFont"
+                        FontSize="20"
+                        Style="{StaticResource BodyLabelStyle}"
+                        Text="Win Percentage" />
+
+                    <ProgressBar
+                        BackgroundColor="Transparent"
+                        HeightRequest="10"
+                        HorizontalOptions="FillAndExpand"
+                        Progress="{Binding Progress}"
+                        ProgressColor="#d8ac75" />
+
+                    <Label
+                        Margin="0,5,0,0"
+                        FontFamily="CardsFont"
+                        FontSize="20"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource BodyLabelStyle}"
+                        Text="{Binding ProgressText}" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Bastra.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Bastra"
+    xmlns:views="clr-namespace:Bastra.Views"
+    Title="Bastra"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="#071731"
+    Shell.TabBarForegroundColor="#d8ac75"
+    Shell.TabBarTitleColor="#d8ac75"
+    Shell.TabBarUnselectedColor="#fff">
+
+    <TabBar>
+        <ShellContent Title="Home"
+                      ContentTemplate="{DataTemplate views:HomePage}"
+                      Icon="home_icon.png"
+                      Route="MainPage" />
+
+        <ShellContent Title="Instructions"
+                      ContentTemplate="{DataTemplate views:InstructionsPage}"
+                      Icon="instructions_icon.png"
+                      Route="InstructionsPage" />
+
+        <ShellContent Title="Profile"
+                      ContentTemplate="{DataTemplate views:ProfilePage}"
+                      Icon="profile_icon.png"
+                      Route="ProfilePage" />
+    </TabBar>
+</Shell>

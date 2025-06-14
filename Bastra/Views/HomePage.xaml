@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Bastra.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Bastra.ViewModels"
+    Padding="0"
+    x:DataType="vm:HomePageVM"
+    BackgroundImageSource="homepage.png"
+    FlowDirection="LeftToRight"
+    Shell.NavBarIsVisible="False">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
+    <Grid Padding="0">
+        <!--  Main Layout  -->
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
+
+            <!--  CONTENT SECTION  -->
+            <VerticalStackLayout
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="20,20,20,40"
+                HorizontalOptions="Center"
+                Spacing="20"
+                VerticalOptions="End">
+
+                <!--  Buttons Section  -->
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
+
+                    <!--  Start Game Button  -->
+                    <Button
+                        BackgroundColor="#d8ac75"
+                            Command="{Binding StartJoinGamePageCommand}"
+                        CornerRadius="15"
+                        FontAttributes="Bold"
+                        FontFamily="CardsFont"
+                        FontSize="37"
+                        HeightRequest="55"
+                        HorizontalOptions="Center"
+                        Text="Start Game"
+                        TextColor="Black"
+                        WidthRequest="280">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.6" />
+                        </Button.Shadow>
+                    </Button>
+
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!--  FOOTER SECTION  -->
+            <StackLayout
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Padding="0,20,0,40"
+                HorizontalOptions="Center">
+                <Label />
+                <Label />
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
